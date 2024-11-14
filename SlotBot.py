@@ -1,8 +1,9 @@
 from telegram import Update
 from telegram.ext import Application, MessageHandler, filters
+import os
 
 # Bot token
-TOKEN = '7874640057:AAERI1_agBABdCckM71H85UWNxJjz2X3c30'
+TOKEN = os.getenv('TOKEN', '7874640057:AAERI1_agBABdCckM71H85UWNxJjz2X3c30')
 
 async def handle_message(update: Update, context):
     if update.message and update.message.dice:
@@ -24,8 +25,9 @@ def main():
     application.add_handler(MessageHandler(filters.Dice.ALL, handle_message))
 
     # Start the bot
-    print("Bot is running. Press Ctrl+C to stop.")
+    print("Bot is starting...")
     application.run_polling(allowed_updates=Update.ALL_TYPES)
+    print("Bot is running. Press Ctrl+C to stop.")
 
 if __name__ == '__main__':
     main()
